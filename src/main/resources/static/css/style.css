@@ -23,6 +23,7 @@ body {
 
 header {
   height: 20vh;
+  min-height: 10rem;
   width: 100%;
   background-color: #ececec;
   display: flex;
@@ -45,4 +46,30 @@ a {
   text-decoration: none;
   color: var(--fontColor);
   font-size: 1.2rem;
+}
+
+a:hover{
+  color: var(--fontColor);
+}
+
+.regions {
+  width: 15rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-right: 1px solid gray;
+}
+
+.regions > ul > li >a {
+  border-left: 1px solid #FFFFFF;
+  padding: 0 0.2rem;
+}
+
+.regions > ul > li >a:hover{
+  border-left: 1px solid gray;
+}
+
+.details_main{
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
 }

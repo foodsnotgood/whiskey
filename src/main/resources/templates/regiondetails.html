@@ -6,10 +6,14 @@
 <body>
 <header th:replace="fragments/header :: header">
 </header>
+<main class="container details_main">
 
-<main>
+    <h1 th:text="${region.name}"></h1>
+    <p th:text="${region.description}">
+    </p>
 
 </main>
+
 
 <div th:replace="fragments/js :: bootstrapjs"></div>
 </body>
