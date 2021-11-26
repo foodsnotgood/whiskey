@@ -10,13 +10,17 @@ public class Webscraper {
 
     public void getElements(String queryString) throws IOException {
         try{
-            Document doc = Jsoup.connect("https://www.thewhiskyexchange.com/search?q=" + queryString).get();
-            Elements elements = doc.select(".product-card");
+            Document doc = Jsoup.connect("https://drankdozijn.be/zoeken?zoekterm=" + queryString).get();
+            Elements listOfElements = doc.select("div.animatedParent");
+            System.out.println(listOfElements.select("div.animated").size());
 
         } catch (IOException exception){
-
+            System.out.println(exception);
         }
+    }
 
-
+    public static void main(String[] args) throws IOException {
+        Webscraper ws = new Webscraper();
+        ws.getElements("oban");
     }
 }
