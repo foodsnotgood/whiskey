@@ -7,6 +7,15 @@ public class ScrapedWhiskyInList {
     private String name;
     private String brand;
     private double price;
+    private String moreInfo;
+
+    public String getMoreInfo() {
+        return moreInfo;
+    }
+
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
+    }
 
     public double getPrice() {
         return price;

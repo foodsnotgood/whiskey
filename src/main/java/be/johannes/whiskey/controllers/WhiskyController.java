@@ -1,19 +1,13 @@
 package be.johannes.whiskey.controllers;
 
-import be.johannes.whiskey.scraper.Webscraper;
+import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class WhiskyController {
 
-    private Webscraper webscraper = new Webscraper();
-
-    @GetMapping("/whiskydetail/{urlMoreInfo}")
-    public String whiskydetail(Model model,
-                               @PathVariable(required = false) String urlMoreInfo){
-        return "whiskydetail";
-    }
+    private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
+    private Logger logger = LoggerFactory.getLogger(WhiskyController.class);
 }

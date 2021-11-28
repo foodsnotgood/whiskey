@@ -8,7 +8,9 @@
 </header>
 
 <main>
+<h1 th:text="${whisky.name}"></h1>
 
+    <p th:text="${whisky.moreInfo}"></p>
 </main>
 
 <div th:replace="fragments/js :: bootstrapjs"></div>

@@ -2,7 +2,8 @@ package be.johannes.whiskey.controllers;
 
 import be.johannes.whiskey.model.Region;
 import be.johannes.whiskey.repositories.RegionRepository;
-import be.johannes.whiskey.scraper.Webscraper;
+import be.johannes.whiskey.scraper.ScraperListHolder;
+import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class SearchController {
     @Autowired
     private RegionRepository regionRepository;
 
-    private Webscraper webscraper = new Webscraper();
+    private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
+    private ScraperListHolder listHolder = new ScraperListHolder();
 
     private Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -29,7 +31,10 @@ public class SearchController {
                          @RequestParam(required = false) String queryText) throws IOException {
         model.addAttribute("regions", regionRepository.findAll());
         logger.info("query Text : -------- " + queryText);
-        if (queryText != null) model.addAttribute("whiskies", webscraper.getElements(queryText));
+        if (queryText != null) {
+            listHolder.setWhiskies(webscraper.getListElements(queryText));
+            model.addAttribute("listHolder", listHolder);
+        }
         return "search";
     }
 
@@ -39,4 +44,12 @@ public class SearchController {
         model.addAttribute("region", region);
         return "regiondetails";
     }
+
+    @GetMapping("/whiskydetail/{index}")
+    public String whiskydetail(Model model,
+                               @PathVariable Integer index){
+        model.addAttribute("whisky", listHolder.getWhiskies().get(index));
+        return "whiskydetail";
+    }
+
 }

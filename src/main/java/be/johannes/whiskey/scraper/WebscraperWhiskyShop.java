@@ -7,9 +7,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Webscraper {
+public class WebscraperWhiskyShop {
 
-    public ArrayList<ScrapedWhiskyInList> getElements(String queryString) throws IOException {
+    public ArrayList<ScrapedWhiskyInList> getListElements(String queryString) throws IOException {
         try{
             Document doc = Jsoup.connect("https://www.whiskyshop.com/catalogsearch/result/?q=" + queryString).get();
             ArrayList<ScrapedWhiskyInList> listOfWhiskyInList = new ArrayList<>();
@@ -22,6 +22,7 @@ public class Webscraper {
                    whiskyInList.setBrand(infoElements.get(i).select("a").attr("data-brand"));
                    whiskyInList.setImageUrl(infoElements.get(i).select("span.product-image-container span").select("img").attr("src"));
                    whiskyInList.setPrice(Double.parseDouble(infoElements.get(i).select("a").attr("data-price")));
+                   whiskyInList.setMoreInfo(getMoreInfo(whiskyInList.getUrlMoreInfo()));
                    System.out.println(whiskyInList.getName());
                    System.out.println(whiskyInList.getImageUrl());
                    System.out.println(whiskyInList.getUrlMoreInfo());
@@ -35,8 +36,13 @@ public class Webscraper {
         return null;
     }
 
+    public String getMoreInfo(String urlMoreInfo) throws IOException{
+        Document doc = Jsoup.connect(urlMoreInfo).get();
+        return doc.select("div.section-content").text();
+    }
+
     public static void main(String[] args) throws IOException {
-        Webscraper ws = new Webscraper();
-        ws.getElements("oban");
+        WebscraperWhiskyShop ws = new WebscraperWhiskyShop();
+        ws.getListElements("oban");
     }
 }

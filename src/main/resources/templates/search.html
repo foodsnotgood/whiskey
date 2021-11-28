@@ -22,17 +22,17 @@
             <input type="text" name="queryText" placeholder="What are you looking for">
             <input type="submit" class="btn btn-lg rounded-pill btn-primary">
         </form>
-        <div class="cards_grid" th:if="${whiskies}">
+        <div class="cards_grid" th:if="${listHolder}" th:object="${listHolder}">
             <div class="row">
-                <div class="card col-md-3" style="width: 18rem;" th:each="whisky : ${whiskies}">
-                    <img th:src="${whisky.getImageUrl()}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${whisky.getName()}">Card title</h5>
-                        <p class="card-text" th:text="${whisky.getBrand()}"> and make up the bulk of the card's content.</p>
-                        <p th:text="${whisky.getPrice()} + '£'"></p>
-                        <a th:href="@{|/whiskydetail/${whisky.getUrlMoreInfo()}|}" class="btn btn-primary">Go somewhere</a>
+                    <div class="card col-md-3" style="width: 18rem;" th:each="whisky, itemStat : *{whiskies}">
+                        <img th:src="${whisky.getImageUrl()}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${whisky.getName()}">Card title</h5>
+                            <p class="card-text" th:text="${whisky.getBrand()}"></p>
+                            <p th:text="${whisky.getPrice()} + '£'"></p>
+                            <a th:href="@{|/whiskydetail/${__itemStat.index__}|}" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
-                </div>
             </div>
 
         </div>
