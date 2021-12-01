@@ -7,6 +7,9 @@
 <header th:replace="fragments/header :: header">
 </header>
 
+<div th:each="whisky : ${whiskies}">
+    <p th:text="${whisky.name}"></p>
+</div>
 
 <div th:replace="fragments/js :: bootstrapjs"></div>
 </body>

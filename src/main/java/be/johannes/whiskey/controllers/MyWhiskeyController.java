@@ -17,9 +17,8 @@ public class MyWhiskeyController {
     private Logger logger = LoggerFactory.getLogger(MyWhiskeyController.class);
 
     @GetMapping("/mywhisky")
-    public String myWhiskey(Model model) {
+    public String myWhisky(Model model) {
+        model.addAttribute("whiskies", whiskyRepository.findAll());
         return "mywhisky";
     }
-
-
 }
