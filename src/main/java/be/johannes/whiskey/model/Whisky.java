@@ -10,19 +10,72 @@ public class Whisky {
     @Id
     private int id;
     private String name;
-    private String metaData;
-    private int cl;
-    private int volAlc;
-    private String description;
+    private String imageUrl;
+    private String brand;
+    private double price;
+    @Column(length = 2000)
+    private String moreInfo;
+    private String distillery;
+    private String region;
+    private String style;
 
-    public Whisky(){};
+    public Whisky() {
+    }
 
-    public Whisky(String name, String metaData, int cl, int volAlc, String description) {
-        this.name = name;
-        this.metaData = metaData;
-        this.cl = cl;
-        this.volAlc = volAlc;
-        this.description = description;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getMoreInfo() {
+        return moreInfo;
+    }
+
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
+    }
+
+    public String getDistillery() {
+        return distillery;
+    }
+
+    public void setDistillery(String distillery) {
+        this.distillery = distillery;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public int getId() {
@@ -41,35 +94,4 @@ public class Whisky {
         this.name = name;
     }
 
-    public String getMetaData() {
-        return metaData;
-    }
-
-    public void setMetaData(String metaData) {
-        this.metaData = metaData;
-    }
-
-    public int getCl() {
-        return cl;
-    }
-
-    public void setCl(int cl) {
-        this.cl = cl;
-    }
-
-    public int getVolAlc() {
-        return volAlc;
-    }
-
-    public void setVolAlc(int volAlc) {
-        this.volAlc = volAlc;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

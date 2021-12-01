@@ -8,11 +8,27 @@
 </header>
 
 <main>
-<h1 th:text="${whisky.name}"></h1>
+    <form th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
 
-    <p th:text="${whisky.moreInfo}"></p>
+        <h1 th:field="*{name}" th:text="*{name}"></h1>
+        <img th:src="*{imageUrl}" alt="">
+        <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
+        <p th:text="*{distillery}"></p>
+        <p th:text="*{region} ? *{region} : ''"></p>
+        <p th:text="*{style} ? *{style} : ''"></p>
+
+        <input th:field="*{name}" style="display: none">
+        <input th:field="*{moreInfo}" style="display: none">
+        <input th:field="*{imageUrl}" style="display: none">
+        <input th:field="*{distillery}" style="display: none">
+        <input th:field="*{style}" style="display: none">
+        <input th:field="*{region}" style="display: none">
+        <input th:field="*{region}" style="display: none">
+
+        <input type="submit" value="save">
+    </form>
+
 </main>
-
 <div th:replace="fragments/js :: bootstrapjs"></div>
 </body>
 </html>

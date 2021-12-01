@@ -8,6 +8,36 @@ public class ScrapedWhiskyInList {
     private String brand;
     private double price;
     private String moreInfo;
+    private String distillery;
+    private String region;
+    private String style;
+    
+    public ScrapedWhiskyInList() {
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public String getDistillery() {
+        return distillery;
+    }
+
+    public void setDistillery(String distillery) {
+        this.distillery = distillery;
+    }
 
     public String getMoreInfo() {
         return moreInfo;
@@ -25,15 +55,6 @@ public class ScrapedWhiskyInList {
         this.price = price;
     }
 
-    public ScrapedWhiskyInList(String urlMoreInfo, String imageUrl, String name, String brand) {
-        this.urlMoreInfo = urlMoreInfo;
-        this.imageUrl = imageUrl;
-        this.name = name;
-        this.brand = brand;
-    }
-
-    public ScrapedWhiskyInList() {
-    }
 
     public String getUrlMoreInfo() {
         return urlMoreInfo;

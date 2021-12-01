@@ -13,7 +13,7 @@ public class Region {
     private String name;
     @Column(length = 1000)
     private String description;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Collection<Whisky> whiskies;
 
     public Region() {
