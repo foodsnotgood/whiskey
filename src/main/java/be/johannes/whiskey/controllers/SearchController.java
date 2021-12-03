@@ -1,7 +1,10 @@
 package be.johannes.whiskey.controllers;
 
 import be.johannes.whiskey.model.Region;
+import be.johannes.whiskey.model.Whisky;
 import be.johannes.whiskey.repositories.RegionRepository;
+import be.johannes.whiskey.repositories.WhiskyRepository;
+import be.johannes.whiskey.scraper.ScrapedWhiskyInList;
 import be.johannes.whiskey.scraper.ScraperListHolder;
 import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,10 +25,21 @@ public class SearchController {
     @Autowired
     private RegionRepository regionRepository;
 
+    @Autowired
+    private WhiskyRepository whiskyRepository;
+
     private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
     private ScraperListHolder listHolder = new ScraperListHolder();
 
     private Logger logger = LoggerFactory.getLogger(SearchController.class);
+
+    @ModelAttribute("whisky")
+    public Whisky findWhisky(@PathVariable(required = false) Integer id) {
+        if (id != null) {
+            return whiskyRepository.findById(id).isPresent() ? whiskyRepository.findById(id).get() : null;
+        }
+        return new Whisky();
+    }
 
     @GetMapping("/search")
     public String search(Model model,
@@ -39,7 +54,7 @@ public class SearchController {
     }
 
     @GetMapping({"/regiondetails/{id}", "/regiondetails"})
-    public String regiondetails(Model model, @PathVariable(required = false) Integer id){
+    public String regiondetails(Model model, @PathVariable(required = false) Integer id) {
         Region region = id != null && id <= regionRepository.count() ? regionRepository.findById(id).get() : null;
         model.addAttribute("region", region);
         return "regiondetails";
@@ -47,8 +62,10 @@ public class SearchController {
 
     @GetMapping("/whiskydetail/{index}")
     public String whiskydetail(Model model,
-                               @PathVariable Integer index){
-        model.addAttribute("whisky", listHolder.getWhiskies().get(index));
+                               @PathVariable Integer index) {
+        ScrapedWhiskyInList whisky = listHolder.getWhiskies().get(index);
+        //model.addAttribute("regionString", whisky.getRegion());
+        model.addAttribute("whisky", whisky);
         return "whiskydetail";
     }
 

@@ -23,12 +23,9 @@ public class WebscraperWhiskyShop {
                 whiskyInList.setImageUrl(infoElements.get(i).select("span.product-image-container span").select("img").attr("src"));
                 whiskyInList.setPrice(Double.parseDouble(infoElements.get(i).select("a").attr("data-price")));
                 whiskyInList.setMoreInfo(getMoreInfo(whiskyInList.getUrlMoreInfo()));
-
                 whiskyInList.setDistillery(getDistillery(whiskyInList.getUrlMoreInfo()));
                 whiskyInList.setRegion(getRegion(whiskyInList.getUrlMoreInfo()));
                 whiskyInList.setStyle(getStyle(whiskyInList.getUrlMoreInfo()));
-                //whiskyInList.setAbv(getABV(whiskyInList.getUrlMoreInfo()).replaceAll("[^0-9]", ""));
-                //whiskyInList.setSize(getSize(whiskyInList.getUrlMoreInfo()).replaceAll("[^0-9]", ""));
                 listOfWhiskyInList.add(whiskyInList);
             }
             return listOfWhiskyInList;
@@ -51,25 +48,13 @@ public class WebscraperWhiskyShop {
 
     private String getRegion(String urlMoreInfo) throws IOException {
         Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Region)");
-        //String region = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Region)").first().nextElementSibling().text();
+
         return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
     }
 
     private String getStyle(String urlMoreInfo) throws IOException {
         Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Style)");
         //String style = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Style)").first().nextElementSibling().text();
-        return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
-    }
-
-    private String getSize(String urlMoreInfo) throws IOException {
-        Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Size)");
-        //String size = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Size)").first().nextElementSibling().text();
-        return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
-    }
-
-    private String getABV(String urlMoreInfo) throws IOException {
-        Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(ABV)");
-        //String abv = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(ABV)").first().nextElementSibling().text();
         return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
     }
 

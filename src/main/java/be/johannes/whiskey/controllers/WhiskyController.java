@@ -1,6 +1,8 @@
 package be.johannes.whiskey.controllers;
 
+import be.johannes.whiskey.model.Region;
 import be.johannes.whiskey.model.Whisky;
+import be.johannes.whiskey.repositories.RegionRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
 import org.slf4j.Logger;
@@ -8,22 +10,41 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WhiskyController {
 
+
     @Autowired
     private WhiskyRepository whiskyRepository;
+
+    @Autowired
+    private RegionRepository regionRepository;
 
     private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
     private Logger logger = LoggerFactory.getLogger(WhiskyController.class);
 
-    @RequestMapping(value = "/whiskydetail", method = RequestMethod.POST)
-    public String addWhisky(@ModelAttribute("whisky") Whisky whisky) {
+
+    @ModelAttribute("whisky")
+    public Whisky newWhisky(@PathVariable(required = false) Integer id) {
+        if (id != null) {
+            return whiskyRepository.findById(id).isPresent() ? whiskyRepository.findById(id).get() : null;
+        }
+        return new Whisky();
+    }
+
+    @PostMapping("/whiskydetail")
+    public String addWhisky(@ModelAttribute("whisky") Whisky whisky,
+                            @RequestParam(name = "regionString", required = false) String regionString) {
         logger.info(" Ingevoerde whisky : --------------- " + whisky.getName());
+        logger.info(" Ingevoerde region string : --------------- " + regionString);
+        Region region = regionRepository.findByName(regionString) != null ? regionRepository.findByName(regionString) : new Region(regionString);
+        logger.info("REGION : --- " + region.getName());
+        whisky.setRegion(region);
         whiskyRepository.save(whisky);
-        return "whiskydetail";
+        return "redirect:mywhisky";
     }
 }

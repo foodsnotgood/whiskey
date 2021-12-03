@@ -13,10 +13,15 @@ public class Region {
     private String name;
     @Column(length = 1000)
     private String description;
-    @OneToMany(fetch = FetchType.LAZY)
-    private Collection<Whisky> whiskies;
+    @OneToMany(mappedBy = "region")
+    private Collection<Whisky> whisky;
+
 
     public Region() {
+    }
+
+    public Region(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -43,11 +48,12 @@ public class Region {
         this.description = description;
     }
 
-    public Collection<Whisky> getWhiskies() {
-        return whiskies;
+
+    public Collection<Whisky> getWhisky() {
+        return whisky;
     }
 
-    public void setWhiskies(Collection<Whisky> whiskies) {
-        this.whiskies = whiskies;
+    public void setWhisky(Collection<Whisky> whisky) {
+        this.whisky = whisky;
     }
 }

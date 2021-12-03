@@ -16,10 +16,22 @@ public class Whisky {
     @Column(length = 2000)
     private String moreInfo;
     private String distillery;
-    private String region;
     private String style;
+    //private String region;
+    @ManyToOne
+    private Region region;
+
 
     public Whisky() {
+    }
+
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     public String getImageUrl() {
@@ -60,14 +72,6 @@ public class Whisky {
 
     public void setDistillery(String distillery) {
         this.distillery = distillery;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
     }
 
     public String getStyle() {

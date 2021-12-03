@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head ('Home')">
 
 </head>
@@ -8,23 +8,23 @@
 </header>
 
 <main>
-    <form th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
-
-        <h1 th:field="*{name}" th:text="*{name}"></h1>
+    <div th:if="${whisky}" th:object="${whisky}">
+        <h1 th:text="*{name}"></h1>
         <img th:src="*{imageUrl}" alt="">
         <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
         <p th:text="*{distillery}"></p>
         <p th:text="*{region} ? *{region} : ''"></p>
         <p th:text="*{style} ? *{style} : ''"></p>
+    </div>
 
+
+    <form th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
         <input th:field="*{name}" style="display: none">
         <input th:field="*{moreInfo}" style="display: none">
         <input th:field="*{imageUrl}" style="display: none">
         <input th:field="*{distillery}" style="display: none">
         <input th:field="*{style}" style="display: none">
-        <input th:field="*{region}" style="display: none">
-        <input th:field="*{region}" style="display: none">
-
+        <input name="regionString" th:value="*{region}" style="display: none">-->
         <input type="submit" value="save">
     </form>
 
