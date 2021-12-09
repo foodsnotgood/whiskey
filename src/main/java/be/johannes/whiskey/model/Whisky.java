@@ -11,13 +11,10 @@ public class Whisky {
     private int id;
     private String name;
     private String imageUrl;
-    private String brand;
-    private double price;
     @Column(length = 2000)
     private String moreInfo;
     private String distillery;
     private String style;
-    //private String region;
     @ManyToOne
     private Region region;
 

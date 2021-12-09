@@ -41,7 +41,13 @@ public class WhiskyController {
                             @RequestParam(name = "regionString", required = false) String regionString) {
         logger.info(" Ingevoerde whisky : --------------- " + whisky.getName());
         logger.info(" Ingevoerde region string : --------------- " + regionString);
-        Region region = regionRepository.findByName(regionString) != null ? regionRepository.findByName(regionString) : new Region(regionString);
+        Region region;
+        if (regionRepository.findByName(regionString).isPresent()) {
+            region = regionRepository.findByName(regionString).get();
+        } else {
+            region = new Region(regionString);
+            regionRepository.save(region);
+        }
         logger.info("REGION : --- " + region.getName());
         whisky.setRegion(region);
         whiskyRepository.save(whisky);
