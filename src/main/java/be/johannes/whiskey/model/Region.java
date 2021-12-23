@@ -1,8 +1,13 @@
 package be.johannes.whiskey.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Collection;
 
+@Getter
+@Setter
 @Entity
 public class Region {
 
@@ -18,42 +23,5 @@ public class Region {
 
 
     public Region() {
-    }
-
-    public Region(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public Collection<Whisky> getWhisky() {
-        return whisky;
-    }
-
-    public void setWhisky(Collection<Whisky> whisky) {
-        this.whisky = whisky;
     }
 }

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @Controller
 public class WhiskyController {
 
@@ -50,7 +54,14 @@ public class WhiskyController {
         }
         logger.info("REGION : --- " + region.getName());
         whisky.setRegion(region);
+        whisky.setDateAdded(getDate());
         whiskyRepository.save(whisky);
         return "redirect:mywhisky";
+    }
+
+    private Date getDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return new Date(dtf.format(now));
     }
 }

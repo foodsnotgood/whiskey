@@ -8,25 +8,29 @@
 </header>
 
 <main>
-    <div th:if="${whisky}" th:object="${whisky}">
-        <h1 th:text="*{name}"></h1>
-        <img th:src="*{imageUrl}" alt="">
-        <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
-        <p th:text="*{distillery}"></p>
-        <p th:text="*{region} ? *{region} : ''"></p>
-        <p th:text="*{style} ? *{style} : ''"></p>
+    <div class="container">
+        <div th:if="${whisky}" th:object="${whisky}">
+            <h1 th:text="*{name}"></h1>
+            <img th:src="*{imageUrl}" alt="">
+            <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
+            <p th:text="*{distillery}"></p>
+            <p th:if="${mine}" th:text="*{region} ? *{region.name} : ''"></p>
+            <p th:unless="${mine}" th:text="*{region} ? *{region} : ''"></p>
+            <p th:text="*{style} ? *{style} : ''"></p>
+        </div>
+
+
+        <form th:unless="${mine}" th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
+            <input th:field="*{name}" style="display: none">
+            <input th:field="*{moreInfo}" style="display: none">
+            <input th:field="*{imageUrl}" style="display: none">
+            <input th:field="*{distillery}" style="display: none">
+            <input th:field="*{style}" style="display: none">
+            <input name="regionString" th:value="*{region}" style="display: none">-->
+            <input type="submit" value="save">
+        </form>
     </div>
 
-
-    <form th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
-        <input th:field="*{name}" style="display: none">
-        <input th:field="*{moreInfo}" style="display: none">
-        <input th:field="*{imageUrl}" style="display: none">
-        <input th:field="*{distillery}" style="display: none">
-        <input th:field="*{style}" style="display: none">
-        <input name="regionString" th:value="*{region}" style="display: none">-->
-        <input type="submit" value="save">
-    </form>
 
 </main>
 <div th:replace="fragments/js :: bootstrapjs"></div>

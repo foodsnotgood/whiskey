@@ -1,7 +1,14 @@
 package be.johannes.whiskey.model;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
 @Entity
 public class Whisky {
 
@@ -17,11 +24,21 @@ public class Whisky {
     private String style;
     @ManyToOne
     private Region region;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dateAdded;
 
 
     public Whisky() {
     }
 
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
 
     public Region getRegion() {
         return region;
@@ -37,22 +54,6 @@ public class Whisky {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getMoreInfo() {
