@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -16,7 +17,11 @@ public class User {
     private Integer id;
     @NotNull(message = "Cannot be null")
     private String username;
+    @NotNull(message = "Cannot be null")
+    private String email;
     private String password;
+    @ManyToMany
+    private Collection<Whisky> whiskies;
 
     public User() {
     }
