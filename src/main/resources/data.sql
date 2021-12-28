@@ -32,3 +32,7 @@ values (nextval('whisky_seq'), 'Caol Ila',
         'https://cdn.whiskyshop.com/media/catalog/product/cache/50f391de93cd48dd70ebbdc71e96a683/c/a/caol_ila_moch_ps.jpg',
         'Taking its name from the Gaelic for ''dawn'', Moch is a wonderful newcomer from the renowned Caol Ila distillery of island of Islay.It is the first single malt from Caol Ila to be selected for taste alone: sweet, smooth and lightly smoky, unconstrained by age, cask wood, strength or finish.',
         'Caol Ila Moch', 'Single Malt', 4, '2021-09-12');
+
+insert into user(id, username, email, password)
+values (nextval('user_seq'), 'johannes', 'johannes@johannes.be',
+        '$2a$12$ycrQ7Pct/hXmLnxOSmjT0u5a.GUXj5CydgAyvmIpzfAV5PjIf6LKu');

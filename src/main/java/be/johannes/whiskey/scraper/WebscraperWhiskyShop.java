@@ -42,7 +42,6 @@ public class WebscraperWhiskyShop {
 
     private String getDistillery(String urlMoreInfo) throws IOException {
         Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Distillery)");
-        //String distillery = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Distillery)").first().nextElementSibling().text();
         return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
     }
 

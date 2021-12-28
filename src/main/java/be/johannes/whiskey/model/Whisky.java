@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Getter
@@ -27,73 +28,9 @@ public class Whisky {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateAdded;
-
+    @ManyToMany(mappedBy = "whiskies")
+    private Collection<User> users;
 
     public Whisky() {
     }
-
-    public Date getDateAdded() {
-        return dateAdded;
-    }
-
-    public void setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
-    }
-
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getMoreInfo() {
-        return moreInfo;
-    }
-
-    public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo;
-    }
-
-    public String getDistillery() {
-        return distillery;
-    }
-
-    public void setDistillery(String distillery) {
-        this.distillery = distillery;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

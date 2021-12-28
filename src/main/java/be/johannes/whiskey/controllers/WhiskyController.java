@@ -1,13 +1,16 @@
 package be.johannes.whiskey.controllers;
 
 import be.johannes.whiskey.model.Region;
+import be.johannes.whiskey.model.User;
 import be.johannes.whiskey.model.Whisky;
 import be.johannes.whiskey.repositories.RegionRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
+import be.johannes.whiskey.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +27,10 @@ public class WhiskyController {
 
     @Autowired
     private WhiskyRepository whiskyRepository;
-
     @Autowired
     private RegionRepository regionRepository;
+    @Autowired
+    private UserService userService;
 
     private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
     private Logger logger = LoggerFactory.getLogger(WhiskyController.class);
@@ -42,9 +46,8 @@ public class WhiskyController {
 
     @PostMapping("/whiskydetail")
     public String addWhisky(@ModelAttribute("whisky") Whisky whisky,
-                            @RequestParam(name = "regionString", required = false) String regionString) {
-        logger.info(" Ingevoerde whisky : --------------- " + whisky.getName());
-        logger.info(" Ingevoerde region string : --------------- " + regionString);
+                            @RequestParam(name = "regionString", required = false) String regionString,
+                            Authentication authentication) {
         Region region;
         if (regionRepository.findByName(regionString).isPresent()) {
             region = regionRepository.findByName(regionString).get();
@@ -52,9 +55,10 @@ public class WhiskyController {
             region = new Region(regionString);
             regionRepository.save(region);
         }
-        logger.info("REGION : --- " + region.getName());
+        User user = userService.getUser(authentication);
         whisky.setRegion(region);
         whisky.setDateAdded(getDate());
+        user.getWhiskies().add(whisky);
         whiskyRepository.save(whisky);
         return "redirect:mywhisky";
     }
