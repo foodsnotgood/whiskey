@@ -33,7 +33,6 @@
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${whisky.getName()}">Card title</h5>
                                 <p class="card-text" th:text="${whisky.getBrand()}"></p>
-                                <p th:text="${whisky.getPrice()} + '£'"></p>
                                 <a th:href="@{|/whiskydetail/${__itemStat.index__}|}" class="btn btn-primary">Go
                                     somewhere</a>
                             </div>

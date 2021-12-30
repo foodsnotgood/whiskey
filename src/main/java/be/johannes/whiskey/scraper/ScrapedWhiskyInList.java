@@ -11,7 +11,7 @@ public class ScrapedWhiskyInList {
     private String imageUrl;
     private String name;
     private String brand;
-    private double price;
+
     private String moreInfo;
     private String distillery;
     private String region;

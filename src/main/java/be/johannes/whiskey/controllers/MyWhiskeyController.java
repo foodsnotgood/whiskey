@@ -1,10 +1,13 @@
 package be.johannes.whiskey.controllers;
 
+import be.johannes.whiskey.model.User;
 import be.johannes.whiskey.repositories.RegionRepository;
+import be.johannes.whiskey.repositories.UserRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +19,17 @@ public class MyWhiskeyController {
 
     @Autowired
     private WhiskyRepository whiskyRepository;
-
     @Autowired
     private RegionRepository regionRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private Logger logger = LoggerFactory.getLogger(MyWhiskeyController.class);
 
     @GetMapping("/mywhisky")
-    public String myWhisky(Model model) {
-        model.addAttribute("whiskies", whiskyRepository.findAll());
+    public String myWhisky(Model model, Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        model.addAttribute("whiskies", whiskyRepository.findAllByUsers(user));
         model.addAttribute("regions", regionRepository.findAll());
         return "mywhisky";
     }

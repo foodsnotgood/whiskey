@@ -21,7 +21,6 @@ public class WebscraperWhiskyShop {
                 whiskyInList.setUrlMoreInfo(infoElements.get(i).select("a").attr("href"));
                 whiskyInList.setBrand(infoElements.get(i).select("a").attr("data-brand"));
                 whiskyInList.setImageUrl(infoElements.get(i).select("span.product-image-container span").select("img").attr("src"));
-                whiskyInList.setPrice(Double.parseDouble(infoElements.get(i).select("a").attr("data-price")));
                 whiskyInList.setMoreInfo(getMoreInfo(whiskyInList.getUrlMoreInfo()));
                 whiskyInList.setDistillery(getDistillery(whiskyInList.getUrlMoreInfo()));
                 whiskyInList.setRegion(getRegion(whiskyInList.getUrlMoreInfo()));

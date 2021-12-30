@@ -5,8 +5,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -25,9 +25,8 @@ public class Whisky {
     private String style;
     @ManyToOne
     private Region region;
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date dateAdded;
+    private LocalDate dateAdded;
     @ManyToMany(mappedBy = "whiskies")
     private Collection<User> users;
 

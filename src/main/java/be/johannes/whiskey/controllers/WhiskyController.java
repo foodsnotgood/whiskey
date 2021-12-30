@@ -6,6 +6,7 @@ import be.johannes.whiskey.model.Whisky;
 import be.johannes.whiskey.repositories.RegionRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
+import be.johannes.whiskey.service.ImageSaveService;
 import be.johannes.whiskey.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Controller
 public class WhiskyController {
@@ -47,7 +46,7 @@ public class WhiskyController {
     @PostMapping("/whiskydetail")
     public String addWhisky(@ModelAttribute("whisky") Whisky whisky,
                             @RequestParam(name = "regionString", required = false) String regionString,
-                            Authentication authentication) {
+                            Authentication authentication) throws Exception {
         Region region;
         if (regionRepository.findByName(regionString).isPresent()) {
             region = regionRepository.findByName(regionString).get();
@@ -59,13 +58,12 @@ public class WhiskyController {
         whisky.setRegion(region);
         whisky.setDateAdded(getDate());
         user.getWhiskies().add(whisky);
+        whisky.setImageUrl(ImageSaveService.saveImageFromUrl(whisky.getImageUrl()));
         whiskyRepository.save(whisky);
         return "redirect:mywhisky";
     }
 
-    private Date getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        return new Date(dtf.format(now));
+    private LocalDate getDate() {
+        return LocalDate.now();
     }
 }
