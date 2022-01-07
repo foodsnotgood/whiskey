@@ -1,5 +1,6 @@
 package be.johannes.whiskey.service;
 
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
@@ -17,15 +18,15 @@ import java.time.LocalDateTime;
 public class ImageService {
 
     public String saveImageFromUrl(String urlOfImage) throws Exception {
-        Path imageDirectory = Paths.get("src/main/resources/static/whiskyImages");
+        Path imageDirectory = Paths.get("uploads");
         if (!Files.exists(imageDirectory)) {
             Files.createDirectories(imageDirectory);
         }
         try {
-            String newFilePath = imageDirectory.toString() + "/" + LocalDateTime.now().hashCode() + ".jpg";
+            String newFilePath = imageDirectory.toString() + "/" + RandomString.make(5) + LocalDateTime.now().hashCode() + ".jpg";
             URL url = new URL(urlOfImage);
             ImageIO.write(getBufferedImageFrom(url), "jpg", new File(newFilePath));
-            return "/" + newFilePath;
+            return newFilePath;
         } catch (Exception e) {
             throw new Exception("Could not save image file");
         }
