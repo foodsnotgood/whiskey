@@ -11,7 +11,9 @@
     <div class="container">
         <div th:if="${whisky}" th:object="${whisky}">
             <h1 th:text="*{name}"></h1>
-            <img th:src="*{imageUrl}" alt="">
+            <img th:unless="${mine}" th:src="@{|*{imageUrl}|}" alt="">
+            <img th:if="${mine}" th:src="@{|*{imageUrl}|}"/>
+            <img src="/whiskyImages/1531113554.jpg" alt="">
             <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
             <p th:text="*{distillery}"></p>
             <p th:if="${mine}" th:text="*{region} ? *{region.name} : ''"></p>

@@ -6,7 +6,7 @@ import be.johannes.whiskey.model.Whisky;
 import be.johannes.whiskey.repositories.RegionRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import be.johannes.whiskey.scraper.WebscraperWhiskyShop;
-import be.johannes.whiskey.service.ImageSaveService;
+import be.johannes.whiskey.service.ImageService;
 import be.johannes.whiskey.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,8 @@ public class WhiskyController {
     private RegionRepository regionRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ImageService imageService;
 
     private WebscraperWhiskyShop webscraper = new WebscraperWhiskyShop();
     private Logger logger = LoggerFactory.getLogger(WhiskyController.class);
@@ -58,7 +60,10 @@ public class WhiskyController {
         whisky.setRegion(region);
         whisky.setDateAdded(getDate());
         user.getWhiskies().add(whisky);
-        whisky.setImageUrl(ImageSaveService.saveImageFromUrl(whisky.getImageUrl()));
+        String imgDirectory = imageService.saveImageFromUrl(whisky.getImageUrl());
+        String[] arr = imgDirectory.split("/");
+        String relativeDirectory = arr[arr.length - 2] + "/" + arr[arr.length - 1];
+        whisky.setImageUrl(relativeDirectory);
         whiskyRepository.save(whisky);
         return "redirect:mywhisky";
     }
