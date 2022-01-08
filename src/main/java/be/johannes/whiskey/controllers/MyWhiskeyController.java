@@ -6,7 +6,6 @@ import be.johannes.whiskey.repositories.RegionRepository;
 import be.johannes.whiskey.repositories.UserRepository;
 import be.johannes.whiskey.repositories.WhiskyRepository;
 import be.johannes.whiskey.service.ImageService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 @Controller
 public class MyWhiskeyController {
@@ -43,7 +38,7 @@ public class MyWhiskeyController {
         return "mywhisky";
     }
 
-    @GetMapping("/whiskydetail/my/{id}")
+    @GetMapping({"/whiskydetail/my/{id}"})
     public String myWhiskyDetails(Model model, @PathVariable Integer id) {
         model.addAttribute("mine", true);
         Whisky whisky = whiskyRepository.findById(id).isPresent() ? whiskyRepository.findById(id).get() : null;
@@ -66,15 +61,5 @@ public class MyWhiskeyController {
         model.addAttribute("whiskies", whiskyRepository.findByRegionId(id));
         model.addAttribute("regions", regionRepository.findAll());
         return "mywhisky";
-    }
-
-    @GetMapping("whisky/image/{id}")
-    public void showWhiskyImage(@PathVariable Integer id,
-                                HttpServletResponse response) throws Exception {
-        response.setContentType("image/jpeg");
-        Whisky whisky = whiskyRepository.findById(id).isPresent() ? whiskyRepository.findById(id).get() : null;
-
-        InputStream is = new ByteArrayInputStream(imageService.convertImageToByteArray(whisky.getImageUrl()));
-        IOUtils.copy(is, response.getOutputStream());
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,9 +11,12 @@
     <nav class="nav">
         <a th:href="@{|/home|}">Home</a>
         <a th:href="@{|/search|}">Search</a>
-        <a th:href="@{|/mywhisky|}">My Whisky</a>
-        <a th:href="@{/logout}">
+        <a sec:authorize="isAuthenticated()" th:href="@{|/mywhisky|}">My Whisky</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
             <button class="btn btn-primary">Logout</button>
+        </a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
+            <button class="btn btn-primary">Login</button>
         </a>
     </nav>
 

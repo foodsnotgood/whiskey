@@ -44,12 +44,12 @@ public class SearchController {
     @GetMapping("/search")
     public String search(Model model,
                          @RequestParam(required = false) String queryText) throws IOException {
-        model.addAttribute("regions", regionRepository.findAll());
-        logger.info("query Text : -------- " + queryText);
+        logger.info("query text: " + queryText);
         if (queryText != null) {
             listHolder.setWhiskies(webscraper.getListElements(queryText));
-            model.addAttribute("listHolder", listHolder);
         }
+
+        model.addAttribute("listHolder", listHolder.getWhiskies());
         return "search";
     }
 
@@ -64,7 +64,6 @@ public class SearchController {
     public String whiskydetail(Model model,
                                @PathVariable Integer index) {
         ScrapedWhiskyInList whisky = listHolder.getWhiskies().get(index);
-        //model.addAttribute("regionString", whisky.getRegion());
         model.addAttribute("whisky", whisky);
         return "whiskydetail";
     }

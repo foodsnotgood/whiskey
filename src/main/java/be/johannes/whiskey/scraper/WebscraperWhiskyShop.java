@@ -52,7 +52,6 @@ public class WebscraperWhiskyShop {
 
     private String getStyle(String urlMoreInfo) throws IOException {
         Elements elements = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Style)");
-        //String style = getDocumentFromUrl(urlMoreInfo).select("dl > dt:contains(Style)").first().nextElementSibling().text();
         return !elements.isEmpty() ? elements.first().nextElementSibling().text() : "not applicable";
     }
 
@@ -60,9 +59,13 @@ public class WebscraperWhiskyShop {
         return Jsoup.connect(url).get();
     }
 
-
     public static void main(String[] args) throws IOException {
         WebscraperWhiskyShop ws = new WebscraperWhiskyShop();
-        ws.getListElements("oban");
+
+        ArrayList<ScrapedWhiskyInList> list = ws.getListElements("lagavulin");
+
+        for (ScrapedWhiskyInList w : list) {
+            System.out.println(w.getName());
+        }
     }
 }

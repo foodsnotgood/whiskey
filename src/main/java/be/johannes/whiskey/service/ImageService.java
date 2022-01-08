@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,23 +31,11 @@ public class ImageService {
         }
     }
 
-    public byte[] convertImageToByteArray(String pathToImage) throws Exception {
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(getBufferedImageFrom(pathToImage), "jpg", byteArrayOutputStream);
-            return byteArrayOutputStream.toByteArray();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private BufferedImage getBufferedImageFrom(URL url) throws IOException {
         try {
             return ImageIO.read(url);
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new IOException("Could not retreive image from " + url);
         }
     }
 
@@ -56,8 +43,7 @@ public class ImageService {
         try {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new IOException("Could not retreive image from " + path);
         }
     }
 }
