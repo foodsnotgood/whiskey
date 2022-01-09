@@ -53,12 +53,6 @@ public class SearchController {
         return "search";
     }
 
-    @GetMapping({"/regiondetails/{id}", "/regiondetails"})
-    public String regiondetails(Model model, @PathVariable(required = false) Integer id) {
-        Region region = id != null && id <= regionRepository.count() ? regionRepository.findById(id).get() : null;
-        model.addAttribute("region", region);
-        return "regiondetails";
-    }
 
     @GetMapping("/whiskydetail/{index}")
     public String whiskydetail(Model model,

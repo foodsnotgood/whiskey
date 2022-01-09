@@ -1,5 +1,6 @@
 package be.johannes.whiskey.repositories;
 
+import be.johannes.whiskey.model.Region;
 import be.johannes.whiskey.model.User;
 import be.johannes.whiskey.model.Whisky;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,6 @@ public interface WhiskyRepository extends CrudRepository<Whisky, Integer> {
     List<Whisky> findByRegionId(@Param("regionId") Integer id);
 
     List<Whisky> findAllByUsers(User user);
+
+    List<Whisky> findAllByUsersAndRegion(User user, Region region);
 }

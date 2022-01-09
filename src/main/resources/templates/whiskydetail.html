@@ -12,15 +12,26 @@
     <div class="container">
         <div class="alert alert-danger" th:if="${error}">Something went wrong while saving</div>
         <div th:if="${whisky}" th:object="${whisky}">
-            <h1 th:text="*{name}"></h1>
-            <img th:unless="${mine}" th:src="@{|*{imageUrl}|}" alt="">
-            <img th:if="${mine}" th:src="@{'/' + *{imageUrl}}"/>
-            <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
-            <p>Distillery: <span th:text="*{distillery}"></span></p>
-            <p th:if="${mine}">Region: <span th:text="*{region} ? *{region.name} : ''"></span></p>
-            <p th:unless="${mine}" th:text="*{region} ? *{region} : ''">Region: <span
-                    th:text="*{region} ? *{region} : ''"></span></p>
-            <p>Style: <span th:text="*{style} ? *{style} : ''"></span></p>
+            <div class="d-flex justify-content-center my-3">
+                <h1 th:text="*{name}"></h1>
+            </div>
+            <div class="d-flex justify-content-center">
+                <img th:unless="${mine}" th:src="@{|*{imageUrl}|}" alt="">
+                <img th:if="${mine}" th:src="@{*{imageUrl.startsWith('http') ? imageUrl : '/' + imageUrl}}"/>
+            </div>
+            <div class="card my-5">
+                <div class="card-body">
+                    <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
+                    <hr>
+                    <p>Distillery: <span th:text="*{distillery}"></span></p>
+                    <p th:if="${mine}">Region: <span th:text="*{region} ? *{region.name} : ''"></span></p>
+                    <p th:unless="${mine}" th:text="*{region} ? *{region} : ''">Region: <span
+                            th:text="*{region} ? *{region} : ''"></span></p>
+                    <p>Style: <span th:text="*{style} ? *{style} : ''"></span></p>
+                </div>
+            </div>
+
+
         </div>
 
 
@@ -31,7 +42,7 @@
             <input th:field="*{distillery}" style="display: none">
             <input th:field="*{style}" style="display: none">
             <input name="regionString" th:value="*{region}" style="display: none">
-            <input type="submit" value="save" class="btn btn-primary">
+            <input type="submit" sec:authorize="isAuthenticated()" value="save" class="btn btn-primary">
         </form>
     </div>
 

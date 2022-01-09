@@ -20,6 +20,7 @@ public class Region {
     private String description;
     @OneToMany(mappedBy = "region")
     private Collection<Whisky> whisky;
+    private String imagePath;
 
 
     public Region() {
