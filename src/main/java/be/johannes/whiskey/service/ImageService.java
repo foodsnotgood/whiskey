@@ -27,7 +27,7 @@ public class ImageService {
             ImageIO.write(getBufferedImageFrom(url), "jpg", new File(newFilePath));
             return newFilePath;
         } catch (Exception e) {
-            throw new Exception("Could not save image file");
+            return "error";
         }
     }
 
@@ -44,6 +44,15 @@ public class ImageService {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
             throw new IOException("Could not retreive image from " + path);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ImageService is = new ImageService();
+        try {
+            is.saveImageFromUrl("https://cdn.whiskyshop.com/media/catalog/product/cache/50f391de93cd48dd70ebbdc71e96a683/j/a/jackdaniels_sinatraselect_ps_1.jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

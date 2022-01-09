@@ -10,19 +10,21 @@
 
 <main>
     <div class="container">
+        <div class="alert alert-danger" th:if="${error}">Something went wrong while saving</div>
         <div th:if="${whisky}" th:object="${whisky}">
             <h1 th:text="*{name}"></h1>
             <img th:unless="${mine}" th:src="@{|*{imageUrl}|}" alt="">
             <img th:if="${mine}" th:src="@{'/' + *{imageUrl}}"/>
             <p th:field="*{moreInfo}" th:text="*{moreInfo}"></p>
-            <p th:text="*{distillery}"></p>
-            <p th:if="${mine}" th:text="*{region} ? *{region.name} : ''"></p>
-            <p th:unless="${mine}" th:text="*{region} ? *{region} : ''"></p>
-            <p th:text="*{style} ? *{style} : ''"></p>
+            <p>Distillery: <span th:text="*{distillery}"></span></p>
+            <p th:if="${mine}">Region: <span th:text="*{region} ? *{region.name} : ''"></span></p>
+            <p th:unless="${mine}" th:text="*{region} ? *{region} : ''">Region: <span
+                    th:text="*{region} ? *{region} : ''"></span></p>
+            <p>Style: <span th:text="*{style} ? *{style} : ''"></span></p>
         </div>
 
 
-        <form th:unless="${mine}" th:action="@{/whiskydetail}" method="post" th:object="${whisky}">
+        <form th:unless="${mine}" th:action="@{|/whiskydetail|}" method="post" th:object="${whisky}">
             <input th:field="*{name}" style="display: none">
             <input th:field="*{moreInfo}" style="display: none">
             <input th:field="*{imageUrl}" style="display: none">

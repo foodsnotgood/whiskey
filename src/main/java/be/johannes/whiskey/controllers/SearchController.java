@@ -65,6 +65,7 @@ public class SearchController {
                                @PathVariable Integer index) {
         ScrapedWhiskyInList whisky = listHolder.getWhiskies().get(index);
         model.addAttribute("whisky", whisky);
+        model.addAttribute("fallBackindex", index);
         return "whiskydetail";
     }
 

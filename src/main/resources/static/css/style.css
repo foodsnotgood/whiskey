@@ -23,28 +23,9 @@ body {
     overflow-x: hidden;
 }
 
-header {
-    height: 20vh;
-    min-height: 10rem;
-    width: 100%;
-    background-color: #ececec;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-header > h1 {
-    margin: 1rem;
-}
-
-nav {
-    width: 30rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-main {
-    height: 100%;
+.login-button {
+    margin-right: 1rem;
+    margin-left: auto;
 }
 
 a {

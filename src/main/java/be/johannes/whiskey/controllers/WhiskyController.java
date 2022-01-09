@@ -58,9 +58,11 @@ public class WhiskyController {
         whisky.setDateAdded(getDate());
         user.getWhiskies().add(whisky);
         String imgDirectory = imageService.saveImageFromUrl(whisky.getImageUrl());
-        String[] arr = imgDirectory.split("/");
-        String relativeDirectory = arr[arr.length - 2] + "/" + arr[arr.length - 1];
-        whisky.setImageUrl(relativeDirectory);
+        if (!imgDirectory.equals("error")) {
+            String[] arr = imgDirectory.split("/");
+            String relativeDirectory = arr[arr.length - 2] + "/" + arr[arr.length - 1];
+            whisky.setImageUrl(relativeDirectory);
+        }
         whiskyRepository.save(whisky);
         return "redirect:mywhisky";
     }
