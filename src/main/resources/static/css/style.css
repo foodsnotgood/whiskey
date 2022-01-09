@@ -66,6 +66,80 @@ a:hover {
     overflow: scroll;
 }
 
+.region-card {
+    position: relative;
+    border: 0;
+    border-radius: 0;
+    height: 25rem;
+    font-size: 1rem;
+}
+
+.region-card > * {
+    border: 0;
+    border-radius: 0;
+}
+
+.region-card::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #35353560;
+    z-index: 1;
+}
+
+.card-img-overlay {
+    z-index: 999;
+}
+
+.region-card-title {
+    font-size: 4em;
+}
+
+.region-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.region-header {
+    height: 30vh;
+    position: relative;
+}
+
+.region-header > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.region-title {
+    position: relative;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.region-title > h1 {
+    font-size: 10rem;
+    height: 30vh;
+    background-color: #FFFFFF50;
+    padding: 0 2rem;
+}
+
+/* ----------  Whisky loader animation ----------------*/
+
 #loading {
     height: 100%;
     width: 100%;

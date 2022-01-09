@@ -1,21 +1,37 @@
-insert into Region (id, name, description)
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Speyside',
-        'Geographically, Speyside is a region in Morayshire within the Highlands of Scotland. For whisky purposes, it is distinguished as a sub-region of the Highlands due to the concentration of distilleries in the area and some stylistic similarities between them. ');
-insert into Region (id, name, description)
+        'Geographically, Speyside is a region in Morayshire within the Highlands of Scotland. ' ||
+        'For whisky purposes, it is distinguished as a sub-region of the Highlands due to the concentration' ||
+        ' of distilleries in the area and some stylistic similarities between them. ', '/img/speyside.jpg');
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Highland',
-        'To call Highland single malts diverse is an understatement: stretching from the Glasgow commuter belt to the Pentland Firth and from the fertile east coast to the rugged west, this vast area boasts a rich variety of distillery styles. From light and grassy to heavily sherried – these are whiskies that refuse to be pigeonholed.');
-insert into Region (id, name, description)
+        'To call Highland single malts diverse is an understatement: stretching from the Glasgow commuter ' ||
+        'belt to the Pentland Firth and from the fertile east coast to the rugged west, this vast area boasts ' ||
+        'a rich variety of distillery styles. From light and grassy to heavily sherried – these are whiskies that' ||
+        ' refuse to be pigeonholed.', '/img/highland.jpg');
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Island',
-        'Scotland’s labyrinthine archipelago of islands were obvious locations for distilleries, especially at a time when illegal operations were the norm. Just a scattered handful of these far-flung facilities remain now (excluding Islay) – although a few newcomers hint at an island distilling renaissance.');
-insert into Region (id, name, description)
+        'Scotland’s labyrinthine archipelago of islands were obvious locations for distilleries, especially' ||
+        ' at a time when illegal operations were the norm. Just a scattered handful of these far-flung facilities ' ||
+        'remain now (excluding Islay) – although a few newcomers hint at an island distilling renaissance.',
+        '/img/island.jpg');
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Islay',
-        'Islay is best known for its disproportionately high number of distilleries – eight, with more planned – and for a distinctively peaty style of single malt. Beyond the obvious lurks a surprising diversity of spirit, making the identity of Islay whisky a more elusive prospect than might first appear.');
-insert into Region (id, name, description)
+        'Islay is best known for its disproportionately high number of distilleries – eight, with more planned – ' ||
+        'and for a distinctively peaty style of single malt. Beyond the obvious lurks a surprising diversity of spirit, ' ||
+        'making the identity of Islay whisky a more elusive prospect than might first appear.', '/img/islay.jpg');
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Lowland',
-        'The Lowlands – like most of Scotland – were once a thriving hub of malt whisky production, until the need for grain to drive blended Scotch production made making single malt an almost forgotten art. But a few outposts preserve the old ways and a grassy, easy-drinking style of malt that still has many admirers.');
-insert into Region (id, name, description)
+        'The Lowlands – like most of Scotland – were once a thriving hub of malt whisky production, until the need for' ||
+        ' grain to drive blended Scotch production made making single malt an almost forgotten art. But a few outposts' ||
+        ' preserve the old ways and a grassy, easy-drinking style of malt that still has many admirers.',
+        '/img/lowland.jpg');
+insert into Region (id, name, description, image_path)
 values (nextval('region_seq'), 'Campbeltown',
-        'Once a whisky boom town of 34 distilleries famed for their smoky, oily character, Campbeltown is quieter now, with only three producers – and one of those only resurrected in 2004. Nonetheless, there are a number of styles here, including peaty whiskies which are a reminder of Campbeltown’s illustrious past.');
+        'Once a whisky boom town of 34 distilleries famed for their smoky, oily character, Campbeltown is quieter now, ' ||
+        'with only three producers – and one of those only resurrected in 2004. Nonetheless, there are a number of styles ' ||
+        'here, including peaty whiskies which are a reminder of Campbeltown’s illustrious past.',
+        '/img/campbeltown.jpg');
 
 insert into whisky(id, distillery, image_url, more_info, name, style, region_id, date_added)
 values (nextval('whisky_seq'), 'Lagavulin',
