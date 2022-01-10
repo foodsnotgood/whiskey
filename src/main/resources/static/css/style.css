@@ -21,6 +21,7 @@ body {
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
+    position: relative;
 }
 
 .login-button {
@@ -132,7 +133,8 @@ a:hover {
 }
 
 .region-title > h1 {
-    font-size: 10rem;
+    font-size: 23vh;
+    letter-spacing: 1rem;
     height: 30vh;
     background-color: #FFFFFF50;
     padding: 0 2rem;
@@ -141,9 +143,14 @@ a:hover {
 /* ----------  Whisky loader animation ----------------*/
 
 #loading {
-    height: 100%;
-    width: 100%;
-    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    width: 100vw;
+    background: #46464620;
+    backdrop-filter: blur(2px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,6 +160,12 @@ a:hover {
 }
 
 #rocksGlass {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     max-height: 80vh;
     animation: shake 1s infinite ease;
 }

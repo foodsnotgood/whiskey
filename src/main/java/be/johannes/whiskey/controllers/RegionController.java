@@ -32,8 +32,10 @@ public class RegionController {
                                 @PathVariable(required = false) Integer id,
                                 Authentication authentication) {
         Region region = id != null && id <= regionRepository.count() ? regionRepository.findById(id).get() : null;
-        User user = userRepository.findByEmail(authentication.getName());
-        model.addAttribute("regionalWhiskies", whiskyRepository.findAllByUsersAndRegion(user, region));
+        if (authentication != null) {
+            User user = userRepository.findByEmail(authentication.getName());
+            model.addAttribute("regionalWhiskies", whiskyRepository.findAllByUsersAndRegion(user, region));
+        }
         model.addAttribute("region", region);
         return "regiondetails";
     }

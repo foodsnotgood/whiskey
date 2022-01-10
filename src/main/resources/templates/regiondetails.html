@@ -21,15 +21,17 @@
                 <p th:text="*{description}"></p>
             </div>
         </div>
-        <p>Whiskies you have tried from this region:</p>
-        <div class="row">
-            <p th:if="${regionalWhiskies.isEmpty()}">Seriously... it's time you drank a dram of <span
-                    th:text="${region.name}"></span>'s finest</p>
-            <div class="card col-md-3 m-1" th:each="whisky : ${regionalWhiskies}">
-                <h5 class="card-header" th:text="${whisky.distillery}"></h5>
-                <div class="card-body">
-                    <h4 class="card-title" th:text="${whisky.name}"></h4>
-                    <a href="#" class="btn btn-primary" th:href="@{|/whiskydetail/my/${whisky.id}|}">More info</a>
+        <div sec:authorize="isAuthenticated()">
+            <p>Whiskies you have tried from this region:</p>
+            <div class="row">
+                <p th:if="${regionalWhiskies.isEmpty()}">Seriously... it's time you drank a dram of <span
+                        th:text="${region.name}"></span>'s finest</p>
+                <div class="card col-md-3 m-1" th:each="whisky : ${regionalWhiskies}">
+                    <h5 class="card-header" th:text="${whisky.distillery}"></h5>
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${whisky.name}"></h4>
+                        <a href="#" class="btn btn-primary" th:href="@{|/whiskydetail/my/${whisky.id}|}">More info</a>
+                    </div>
                 </div>
             </div>
         </div>

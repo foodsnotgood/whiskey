@@ -35,7 +35,7 @@
         </div>
 
 
-        <form th:unless="${mine}" th:action="@{|/whiskydetail|}" method="post" th:object="${whisky}">
+        <form class="my-3" th:unless="${mine}" th:action="@{|/whiskydetail|}" method="post" th:object="${whisky}">
             <input th:field="*{name}" style="display: none">
             <input th:field="*{moreInfo}" style="display: none">
             <input th:field="*{imageUrl}" style="display: none">
