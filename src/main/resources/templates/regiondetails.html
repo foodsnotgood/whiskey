@@ -9,8 +9,8 @@
 </header>
 
 <main th:object="${region}">
-    <div class="region-header">
-        <div class="region-title">
+    <div class="full-header">
+        <div class="full-header-title">
             <h1 th:text="*{name}"></h1>
         </div>
         <img th:src="@{|*{imagePath}|}" alt="">

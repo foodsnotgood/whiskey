@@ -9,6 +9,9 @@
 </header>
 
 <main>
+    <div class="background">
+        <img th:src="@{|${whisky.imageUrl}|}" alt="">
+    </div>
     <div class="container">
         <div class="alert alert-danger" th:if="${error}">Something went wrong while saving</div>
         <div th:if="${whisky}" th:object="${whisky}">
