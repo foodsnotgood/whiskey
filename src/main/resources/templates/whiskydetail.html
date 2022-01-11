@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/head :: head ('Home')">
+<head th:replace="fragments/head :: head (${whisky.name})">
 
 </head>
 <body>
@@ -31,6 +31,8 @@
                     <p th:unless="${mine}" th:text="*{region} ? *{region} : ''">Region: <span
                             th:text="*{region} ? *{region} : ''"></span></p>
                     <p>Style: <span th:text="*{style} ? *{style} : ''"></span></p>
+                    <p th:if="${mine}">Date added: <span th:text="*{#temporals.format(dateAdded, 'dd/MM/yyyy')}"></span>
+                    </p>
                 </div>
             </div>
 
