@@ -30,7 +30,6 @@ body {
 }
 
 a {
-    margin: 1rem;
     text-decoration: none;
     color: var(--fontColor);
     font-size: 1.2rem;
@@ -38,6 +37,10 @@ a {
 
 a:hover {
     color: var(--fontColor);
+}
+
+.nav-item, .navbar-brand {
+    margin: 1rem;
 }
 
 .regions {
@@ -175,6 +178,10 @@ main {
     min-height: 200px;
     object-fit: contain;
     z-index: -10;
+}
+
+.field-error {
+    background-color: #FF000050;
 }
 
 /* ----------  Whisky loader animation ----------------*/

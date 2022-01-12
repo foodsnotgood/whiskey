@@ -11,6 +11,4 @@ public interface RegionRepository extends CrudRepository<Region, Integer> {
 
     @Query("select r from Region r where :region is null or upper(:region) = upper(r.name)")
     Optional<Region> findByName(@Param("region") String regionString);
-
-    // Optional<Region> findByName(String name);
 }

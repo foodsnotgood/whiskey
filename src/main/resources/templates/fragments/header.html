@@ -32,6 +32,7 @@
             </ul>
             <div class="my-2 my-lg-0 login-button">
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+                    <span th:text="${#authentication.name}"></span>
                     <button class="btn btn-primary">Logout</button>
                 </a>
                 <a sec:authorize="!isAuthenticated()" th:href="@{/login}">

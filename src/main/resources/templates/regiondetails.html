@@ -22,10 +22,11 @@
             </div>
         </div>
         <div sec:authorize="isAuthenticated()">
-            <p>Whiskies you have tried from this region:</p>
+            <p th:unless="${regionalWhiskies.isEmpty()}">Whiskies you have tried from this region:</p>
             <div class="row">
-                <p th:if="${regionalWhiskies.isEmpty()}">Seriously... it's time you drank a dram of <span
-                        th:text="${region.name}"></span>'s finest</p>
+                <p th:if="${regionalWhiskies.isEmpty()}" class="alert alert-info">Seriously... it's time you drank a
+                    dram of <span
+                            th:text="${region.name}"></span>'s finest</p>
                 <div class="card col-md-3 m-1" th:each="whisky : ${regionalWhiskies}">
                     <h5 class="card-header" th:text="${whisky.distillery}"></h5>
                     <div class="card-body">

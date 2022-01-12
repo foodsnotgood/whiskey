@@ -16,6 +16,9 @@ public class User {
     @Id
     private Integer id;
     @NotNull(message = "Cannot be null")
+    private String firstName;
+    @NotNull(message = "Cannot be null")
+    private String lastName;
     private String username;
     @NotNull(message = "Cannot be null")
     private String email;

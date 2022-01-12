@@ -49,16 +49,16 @@ values (nextval('whisky_seq'), 'Caol Ila',
         'Taking its name from the Gaelic for ''dawn'', Moch is a wonderful newcomer from the renowned Caol Ila distillery of island of Islay.It is the first single malt from Caol Ila to be selected for taste alone: sweet, smooth and lightly smoky, unconstrained by age, cask wood, strength or finish.',
         'Caol Ila Moch', 'Single Malt', 4, '2021-09-12');
 
-insert into user(id, username, email, password)
-values (nextval('user_seq'), 'johannes', 'johannes@johannes.be',
+insert into user(id, first_name, last_name, email, password)
+values (nextval('user_seq'), 'johannes', 'roeder', 'johannes@johannes.be',
         '$2a$12$ycrQ7Pct/hXmLnxOSmjT0u5a.GUXj5CydgAyvmIpzfAV5PjIf6LKu');
 
-insert into user(id, username, email, password)
-values (nextval('user_seq'), 'roeder', 'roeder@roeder.be',
+insert into user(id, first_name, last_name, email, password)
+values (nextval('user_seq'), 'roeder', 'johannes', 'roeder@roeder.be',
         '$2a$12$yH0pnhZX29DV3n15XjvIdOl0w3ua4mdlL/gjYOQ2Tn74mEGzS4bcS');
 
-insert into user(id, username, email, password)
-values (nextval('user_seq'), 'bert', 'bert@thomasmore.be',
+insert into user(id, first_name, last_name, email, password)
+values (nextval('user_seq'), 'bert', 'busschop', 'bert@thomasmore.be',
         '$2a$12$xTuUzAqcoS5w.XoUGQ.zw.mOlwo0t0s3w279eMiei1j9KJfMsZCVS');
 
 insert into user_whiskies(users_id, whiskies_id)
