@@ -57,6 +57,10 @@ insert into user(id, username, email, password)
 values (nextval('user_seq'), 'roeder', 'roeder@roeder.be',
         '$2a$12$yH0pnhZX29DV3n15XjvIdOl0w3ua4mdlL/gjYOQ2Tn74mEGzS4bcS');
 
+insert into user(id, username, email, password)
+values (nextval('user_seq'), 'bert', 'bert@thomasmore.be',
+        '$2a$12$xTuUzAqcoS5w.XoUGQ.zw.mOlwo0t0s3w279eMiei1j9KJfMsZCVS');
+
 insert into user_whiskies(users_id, whiskies_id)
 values (1, 1);
 insert into user_whiskies(users_id, whiskies_id)
@@ -65,3 +69,9 @@ insert into user_whiskies(users_id, whiskies_id)
 values (2, 1);
 insert into user_whiskies(users_id, whiskies_id)
 values (2, 3);
+insert into user_whiskies(users_id, whiskies_id)
+values (3, 1);
+insert into user_whiskies(users_id, whiskies_id)
+values (3, 2);
+insert into user_whiskies(users_id, whiskies_id)
+values (3, 3);
